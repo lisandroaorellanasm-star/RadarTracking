@@ -1,3 +1,5 @@
+import type { Polygon } from 'geojson'
+
 // Database Types
 export interface Profile {
     id: string;
@@ -26,7 +28,7 @@ export interface Location {
     latitude: number;
     longitude: number;
     geofence_radius: number; // in meters
-    geofence_polygon?: GeoJSON.Polygon;
+    geofence_polygon?: Polygon;
     is_active: boolean;
     created_at: string;
 }
