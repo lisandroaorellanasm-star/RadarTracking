@@ -3,6 +3,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { Loader } from '@googlemaps/js-api-loader'
 
+// Type declaration for google namespace
+declare global {
+    interface Window {
+        google: any
+    }
+}
+
+// Use window.google to avoid TypeScript errors
+const google = typeof window !== 'undefined' ? window.google : undefined
+
 interface MapComponentProps {
     center?: { lat: number; lng: number }
     zoom?: number
@@ -23,9 +33,9 @@ export function MapComponent({
     onMapClick,
 }: MapComponentProps) {
     const mapRef = useRef<HTMLDivElement>(null)
-    const [map, setMap] = useState<google.maps.Map | null>(null)
-    const [markers, setMarkers] = useState<google.maps.Marker[]>([])
-    const [circles, setCircles] = useState<google.maps.Circle[]>([])
+    const [map, setMap] = useState<any>(null)
+    const [markers, setMarkers] = useState<any[]>([])
+    const [circles, setCircles] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
@@ -71,7 +81,7 @@ export function MapComponent({
 
                     // Add click listener
                     if (onMapClick) {
-                        mapInstance.addListener('click', (e: google.maps.MapMouseEvent) => {
+                        mapInstance.addListener('click', (e: any) => {
                             if (e.latLng) {
                                 onMapClick(e.latLng.lat(), e.latLng.lng())
                             }
@@ -96,8 +106,8 @@ export function MapComponent({
         markers.forEach((marker) => marker.setMap(null))
         circles.forEach((circle) => circle.setMap(null))
 
-        const newMarkers: google.maps.Marker[] = []
-        const newCircles: google.maps.Circle[] = []
+        const newMarkers: any[] = []
+        const newCircles: any[] = []
 
         locations.forEach((location) => {
             // Create marker
