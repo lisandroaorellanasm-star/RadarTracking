@@ -1,0 +1,132 @@
+SOP ARQUITECTURA RADARTRACKING
+
+Quiero que generes una ARQUITECTURA TÉCNICA COMPLETA para una plataforma SaaS similar a TrackingTable, con las siguientes características principales:
+
+- Notificaciones push ilimitadas
+- Notificaciones basadas en geolocalización (GeoPush)
+- Campañas automatizadas
+- CRM básico (clientes, visitas, historial)
+- Base de datos descargable (CSV)
+- Panel en tiempo real (dashboard)
+- Fidelización (tarjetas digitales, puntos, recompensas)
+- Soporte multi-ubicación (1–5+ locales por cuenta)
+- Onboarding asistido
+- Soporte 24/7 (chat/tickets)
+- Roles de usuario (Admin, Staff)
+
+Sigue estas instrucciones EXACTAS:
+
+1. FORMATO DE LA RESPUESTA
+   - Entregar la arquitectura en secciones claras y numeradas.
+   - Usar títulos y subtítulos técnicos.
+   - Mantener tono profesional, preciso y directo.
+   - No usar lenguaje emocional ni adornos.
+   - Todo debe ser implementable por un equipo técnico.
+
+2. SECCIONES OBLIGATORIAS DE LA ARQUITECTURA
+
+   2.1. Visión general de la arquitectura
+        - Describir el tipo de arquitectura (ej: microservicios, monolito modular, etc.).
+        - Explicar brevemente el flujo principal: negocio → panel → backend → notificaciones → cliente final.
+
+   2.2. Frontend
+        - Framework: Next.js + TypeScript + TailwindCSS.
+        - Módulos principales: login, dashboard, campañas, clientes, ubicaciones, configuración, exportación CSV.
+        - Manejo de estado (ej: Zustand, Redux o similar).
+        - Estrategia de SSR/ISR para rendimiento.
+
+   2.3. Backend / API
+        - Lenguaje: Python (FastAPI) o Node.js (especificar uno y justificar).
+        - Servicios principales:
+          - Servicio de autenticación y roles.
+          - Servicio de clientes y CRM.
+          - Servicio de notificaciones push.
+          - Servicio de geolocalización y geofencing.
+          - Servicio de campañas automatizadas.
+          - Servicio de reporting y métricas.
+        - Estilo de API: REST (y opcionalmente GraphQL para reporting).
+
+   2.4. Base de datos y modelo de datos
+        - Motor principal: PostgreSQL.
+        - Cache: Redis.
+        - Tablas mínimas:
+          - usuarios
+          - negocios
+          - ubicaciones
+          - clientes
+          - tokens_dispositivos
+          - notificaciones
+          - campañas
+          - eventos_geolocalizacion
+          - logs_actividad
+        - Explicar relaciones clave (ej: negocio–ubicaciones–clientes).
+
+   2.5. Sistema de notificaciones push
+        - Proveedor: Firebase Cloud Messaging (FCM) u otro equivalente.
+        - Flujo:
+          - Registro de token de dispositivo.
+          - Envío individual, masivo y segmentado.
+          - Manejo de errores y reintentos.
+        - Almacenamiento de logs de entrega.
+
+   2.6. Geolocalización y geofencing
+        - Uso de Google Maps API u otro proveedor.
+        - Modelo de zonas geográficas (radio, coordenadas).
+        - Flujo:
+          - Cliente comparte ubicación.
+          - Backend evalúa si entra/sale de una zona.
+          - Disparo de notificación o evento.
+        - Consideraciones de precisión y rendimiento.
+
+   2.7. Motor de campañas automatizadas
+        - Describir el motor de reglas (ej: “si cliente no visita en X días”, “si entra en zona Y”).
+        - Uso de jobs programados (Celery, Temporal.io o cron).
+        - Persistencia de estado de campañas.
+        - Integración con módulo de notificaciones.
+
+   2.8. Panel administrativo y reporting
+        - Métricas clave: notificaciones enviadas, entregadas, clics, visitas, recurrencia, clientes activos.
+        - Gráficos y tablas.
+        - Filtros por rango de fechas, ubicación, campaña.
+
+   2.9. Infraestructura y despliegue
+        - Cloud: AWS, Azure o GCP (elegir uno y justificar).
+        - Componentes:
+          - Backend (containers: Docker + orquestador: ECS/Kubernetes).
+          - Base de datos gestionada (RDS/Cloud SQL).
+          - Redis gestionado.
+          - CDN para frontend.
+        - Estrategia de escalado horizontal.
+        - Balanceador de carga.
+        - Certificados SSL y WAF.
+
+   2.10. Seguridad y cumplimiento
+        - Autenticación y autorización (JWT, roles).
+        - Encriptación en tránsito (TLS) y en reposo.
+        - Manejo de datos personales (GDPR/CCPA).
+        - Logs de auditoría.
+        - Gestión de consentimientos para notificaciones.
+
+   2.11. Observabilidad y monitoreo
+        - Logs centralizados.
+        - Métricas (CPU, RAM, latencia, errores).
+        - Alertas (fallos en push, caídas de servicios, errores 5xx).
+        - Herramientas sugeridas (ej: Prometheus, Grafana, CloudWatch).
+
+   2.12. Escalabilidad y evolución futura
+        - Cómo escalar a miles de negocios y millones de notificaciones.
+        - Posible migración a arquitectura de microservicios.
+        - Integración futura con modelos de IA (segmentación inteligente, recomendaciones, etc.).
+
+3. ESTILO Y RESTRICCIONES
+   - No inventar tecnologías exóticas; usar stack estándar y realista.
+   - No usar frases vagas; todo debe ser concreto y técnico.
+   - No incluir ejemplos de código, solo arquitectura y diseño.
+   - Mantener todo en español neutro.
+
+4. ENTREGA FINAL
+   - Entregar la arquitectura completa en un solo bloque.
+   - No agregar comentarios fuera de la arquitectura.
+   - No hacer preguntas de vuelta; asume decisiones razonables donde falte detalle.
+
+Genera ahora la ARQUITECTURA TÉCNICA COMPLETA siguiendo todas estas reglas.

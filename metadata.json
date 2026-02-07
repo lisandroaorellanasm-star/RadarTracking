@@ -1,0 +1,7 @@
+{
+  "name": "Radar Enterprise",
+  "description": "A high-fidelity location intelligence platform for managing geofences, campaigns, and customer loyalty rewards with integrated AI insights.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

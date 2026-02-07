@@ -1,0 +1,64 @@
+SOP RADARTRACKING
+
+
+Quiero que generes un SOP (Standard Operating Procedure) completo, profesional y accionable para construir una aplicación SaaS similar a TrackingTable, con las siguientes características:
+
+- Notificaciones push ilimitadas
+- Notificaciones basadas en geolocalización (GeoPush)
+- Campañas automatizadas
+- CRM básico (clientes, visitas, historial)
+- Base de datos descargable
+- Panel en tiempo real
+- Fidelización (tarjetas digitales, puntos, recompensas)
+- Soporte multi-ubicación
+- Onboarding asistido
+- Dashboard con métricas
+- Exportación CSV
+- Roles de usuario (Admin, Staff)
+
+Sigue estas reglas EXACTAS:
+
+1. FORMATO DEL SOP
+   - Entregar el SOP en pasos numerados.
+   - Cada paso debe iniciar con un verbo en infinitivo.
+   - Mantener tono profesional, claro y directo.
+   - No usar adornos, opiniones ni lenguaje emocional.
+   - Todo debe ser accionable y replicable por cualquier persona.
+
+2. ESTRUCTURA OBLIGATORIA
+   A. Título del SOP  
+   B. Objetivo (máximo 3 líneas)  
+   C. Alcance (qué incluye y qué no incluye)  
+   D. Responsables (roles, no nombres)  
+   E. Materiales / herramientas necesarias  
+   F. Procedimiento paso a paso (mínimo 12 pasos)  
+   G. Errores comunes y cómo evitarlos  
+   H. Indicadores de éxito (KPIs medibles)  
+   I. Checklist final de verificación  
+
+3. DETALLES TÉCNICOS QUE DEBES INCLUIR
+   - Frontend: Next.js, TypeScript, TailwindCSS
+   - Backend: FastAPI o Node.js
+   - Base de datos: PostgreSQL + Redis
+   - Push: Firebase Cloud Messaging (FCM)
+   - Geolocalización: Google Maps API + geofencing server-side
+   - Automatización: Celery / Temporal.io
+   - Infraestructura: AWS / Azure / GCP
+   - Panel administrativo con métricas en tiempo real
+   - Exportación CSV
+   - Roles y permisos
+   - Logs y auditoría
+   - Cumplimiento GDPR / CCPA
+
+4. ESTILO DEL PROCEDIMIENTO
+   - Cada paso debe ser breve, directo y comenzar con un verbo.
+   - Si un paso requiere subpasos, listarlos con viñetas.
+   - Mantener consistencia en tiempos verbales y formato.
+   - No asumir información no proporcionada.
+
+5. ENTREGA FINAL
+   - Entregar el SOP completo en un solo bloque.
+   - No agregar comentarios adicionales fuera del SOP.
+   - No incluir ejemplos a menos que yo los solicite.
+
+Genera ahora el SOP siguiendo todas estas reglas.
