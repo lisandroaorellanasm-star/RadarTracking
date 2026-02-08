@@ -178,12 +178,20 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            {/* Stats Section */}
-            <section className="py-20 bg-gray-50">
+            {/* Stats Section (Clientes) */}
+            <section id="clientes" className="py-20 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                            Confían en nosotros
+                        </h2>
+                        <p className="text-xl text-gray-600">
+                            Negocios de todos los tamaños usan RadarTracking para crecer
+                        </p>
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {stats.map((stat, index) => (
-                            <div key={index} className="text-center">
+                            <div key={index} className="text-center bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
                                 <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-100 rounded-2xl mb-4">
                                     {stat.icon}
                                 </div>
@@ -191,6 +199,117 @@ export default function LandingPage() {
                                 <p className="text-gray-600">{stat.label}</p>
                             </div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Plans Section */}
+            <section id="planes" className="py-20 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                            Planes simples y transparentes
+                        </h2>
+                        <p className="text-xl text-gray-600">
+                            Comienza gratis y crece a tu ritmo
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                        {/* Free Plan */}
+                        <div className="border border-gray-200 rounded-2xl p-8 hover:border-orange-500 transition-colors relative">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2">Gratis</h3>
+                            <p className="text-gray-600 mb-6">Para empezar a probar</p>
+                            <div className="text-4xl font-bold text-gray-900 mb-6">$0<span className="text-lg text-gray-500 font-normal">/mes</span></div>
+                            <ul className="space-y-4 mb-8 text-left">
+                                <li className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <span className="text-gray-700">100 Notificaciones/mes</span>
+                                </li>
+                                <li className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <span className="text-gray-700">1 Ubicación</span>
+                                </li>
+                                <li className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <span className="text-gray-700">Soporte básico</span>
+                                </li>
+                            </ul>
+                            <Link href="/login" className="block w-full py-3 px-6 text-center border-2 border-orange-600 text-orange-600 rounded-xl font-bold hover:bg-orange-50 transition-colors">
+                                Crear cuenta gratis
+                            </Link>
+                        </div>
+                        {/* Pro Plan */}
+                        <div className="bg-gray-900 rounded-2xl p-8 shadow-xl relative transform scale-105 z-10">
+                            <div className="absolute top-0 right-0 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                            <h3 className="text-2xl font-bold text-white mb-2">Pro</h3>
+                            <p className="text-gray-400 mb-6">Para negocios en crecimiento</p>
+                            <div className="text-4xl font-bold text-white mb-6">$29<span className="text-lg text-gray-500 font-normal">/mes</span></div>
+                            <ul className="space-y-4 mb-8 text-left">
+                                <li className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                                    <span className="text-gray-300">Notificaciones ilimitadas</span>
+                                </li>
+                                <li className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                                    <span className="text-gray-300">5 Ubicaciones</span>
+                                </li>
+                                <li className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                                    <span className="text-gray-300">Automatización avanzada</span>
+                                </li>
+                            </ul>
+                            <Link href="/login" className="block w-full py-3 px-6 text-center bg-orange-600 text-white rounded-xl font-bold hover:bg-orange-700 transition-colors shadow-lg shadow-orange-900/20">
+                                Comenzar prueba gratis
+                            </Link>
+                        </div>
+                        {/* Enterprise Plan */}
+                        <div className="border border-gray-200 rounded-2xl p-8 hover:border-orange-500 transition-colors">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
+                            <p className="text-gray-600 mb-6">Para grandes cadenas</p>
+                            <div className="text-4xl font-bold text-gray-900 mb-6">Personalizado</div>
+                            <ul className="space-y-4 mb-8 text-left">
+                                <li className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
+                                    <span className="text-gray-700">Ubicaciones ilimitadas</span>
+                                </li>
+                                <li className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
+                                    <span className="text-gray-700">API Access</span>
+                                </li>
+                                <li className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
+                                    <span className="text-gray-700">Soporte dedicado 24/7</span>
+                                </li>
+                            </ul>
+                            <Link href="/login" className="block w-full py-3 px-6 text-center border-2 border-gray-200 text-gray-600 rounded-xl font-bold hover:border-gray-900 hover:text-gray-900 transition-colors">
+                                Contactar ventas
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* FAQ Section */}
+            <section id="preguntas" className="py-20 bg-gray-50">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                            Preguntas Frecuentes
+                        </h2>
+                    </div>
+                    <div className="space-y-6">
+                        <div className="bg-white p-6 rounded-xl shadow-sm">
+                            <h3 className="font-bold text-lg mb-2">¿Cómo funciona el geofencing?</h3>
+                            <p className="text-gray-600">Creamos un perímetro virtual alrededor de tu negocio. Cuando un cliente con la app entra en esa zona, recibe automáticamente tu notificación.</p>
+                        </div>
+                        <div className="bg-white p-6 rounded-xl shadow-sm">
+                            <h3 className="font-bold text-lg mb-2">¿Necesito conocimientos técnicos?</h3>
+                            <p className="text-gray-600">No, nuestra plataforma es muy fácil de usar. Solo configura tu ubicación, crea tu mensaje y listo.</p>
+                        </div>
+                        <div className="bg-white p-6 rounded-xl shadow-sm">
+                            <h3 className="font-bold text-lg mb-2">¿Puedo cancelar en cualquier momento?</h3>
+                            <p className="text-gray-600">Sí, no hay contratos a largo plazo. Puedes cancelar o cambiar tu plan cuando quieras.</p>
+                        </div>
                     </div>
                 </div>
             </section>
