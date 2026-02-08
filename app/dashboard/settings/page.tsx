@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
-import { Settings, Bell, MapPin, User, Shield, CreditCard } from 'lucide-react'
+import { Settings, Bell, MapPin, User, Shield, CreditCard, Zap, CheckCircle, AlertCircle } from 'lucide-react'
 
 export default function SettingsPage() {
     const [settings, setSettings] = useState({
@@ -13,7 +13,32 @@ export default function SettingsPage() {
         phone: '+1 234 567 8900',
         notificationsEnabled: true,
         geofenceRadius: 100,
+        n8nWebhookUrl: '',
     })
+
+    const [isTestingWebhook, setIsTestingWebhook] = useState(false)
+    const [webhookStatus, setWebhookStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+    const handleTestWebhook = async () => {
+        setIsTestingWebhook(true)
+        setWebhookStatus('idle')
+        try {
+            const res = await fetch('/api/webhooks/trigger', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ webhookUrl: settings.n8nWebhookUrl }),
+            })
+            if (res.ok) {
+                setWebhookStatus('success')
+            } else {
+                setWebhookStatus('error')
+            }
+        } catch (error) {
+            setWebhookStatus('error')
+        } finally {
+            setIsTestingWebhook(false)
+        }
+    }
 
     return (
         <div className="space-y-6">
@@ -26,6 +51,54 @@ export default function SettingsPage() {
                     Administra la configuración de tu cuenta y negocio
                 </p>
             </div>
+
+            {/* Integrations Settings - n8n */}
+            <Card className="border-orange-500/50 bg-orange-50/5 dark:bg-orange-900/10">
+                <CardHeader>
+                    <CardTitle className="flex items-center text-orange-600 dark:text-orange-400">
+                        <Zap className="w-5 h-5 mr-2" />
+                        Integraciones & Automatización (n8n)
+                    </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Conecta RadarTracking con n8n para automatizar tus flujos de trabajo. Pega aquí tu URL de Webhook.
+                    </p>
+                    <div className="flex gap-4 items-end">
+                        <div className="flex-1">
+                            <Input
+                                label="n8n Webhook URL"
+                                placeholder="https://tu-instancia-n8n.com/webhook/..."
+                                value={settings.n8nWebhookUrl}
+                                onChange={(e) => setSettings({ ...settings, n8nWebhookUrl: e.target.value })}
+                            />
+                        </div>
+                        <Button
+                            variant="outline"
+                            onClick={handleTestWebhook}
+                            disabled={!settings.n8nWebhookUrl || isTestingWebhook}
+                            className="mb-[2px]"
+                        >
+                            {isTestingWebhook ? 'Enviando...' : 'Probar Webhook'}
+                        </Button>
+                    </div>
+                    {webhookStatus === 'success' && (
+                        <div className="flex items-center text-green-600 text-sm bg-green-50 p-2 rounded border border-green-200">
+                            <CheckCircle className="w-4 h-4 mr-2" />
+                            Evento de prueba enviado correctamente a n8n.
+                        </div>
+                    )}
+                    {webhookStatus === 'error' && (
+                        <div className="flex items-center text-red-600 text-sm bg-red-50 p-2 rounded border border-red-200">
+                            <AlertCircle className="w-4 h-4 mr-2" />
+                            Error al enviar el evento. Verifica la URL.
+                        </div>
+                    )}
+                    <Button variant="primary">
+                        Guardar Configuración
+                    </Button>
+                </CardContent>
+            </Card>
 
             {/* Business Settings */}
             <Card>
