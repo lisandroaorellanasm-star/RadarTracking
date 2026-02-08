@@ -10,8 +10,7 @@ declare global {
     }
 }
 
-// Use window.google to avoid TypeScript errors
-const google = typeof window !== 'undefined' ? window.google : undefined
+
 
 interface MapComponentProps {
     center?: { lat: number; lng: number }
@@ -57,7 +56,14 @@ export function MapComponent({
 
             try {
                 setLoading(true)
-                const google = await loader.load()
+                await loader.load()
+
+                // Extra safety check
+                if (!window.google || !window.google.maps) {
+                    throw new Error('Google Maps API failed to load')
+                }
+
+                const google = window.google
 
                 if (mapRef.current) {
                     const mapInstance = new google.maps.Map(mapRef.current, {
@@ -100,7 +106,9 @@ export function MapComponent({
 
     // Update markers and circles when locations change
     useEffect(() => {
-        if (!map) return
+        if (!map || !window.google || !window.google.maps) return
+
+        const google = window.google
 
         // Clear existing markers and circles
         markers.forEach((marker) => marker.setMap(null))
@@ -160,8 +168,8 @@ export function MapComponent({
         setCircles(newCircles)
 
         // Fit bounds to show all locations
-        if (locations.length > 0) {
-            const bounds = new google.maps.LatLngBounds()
+        if (locations.length > 0 && window.google && window.google.maps) {
+            const bounds = new window.google.maps.LatLngBounds()
             locations.forEach((location) => {
                 bounds.extend({ lat: location.latitude, lng: location.longitude })
             })
