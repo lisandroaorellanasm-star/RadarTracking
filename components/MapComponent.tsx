@@ -63,10 +63,8 @@ export function MapComponent({
                     throw new Error('Google Maps API failed to load')
                 }
 
-                const google = window.google
-
                 if (mapRef.current) {
-                    const mapInstance = new google.maps.Map(mapRef.current, {
+                    const mapInstance = new window.google.maps.Map(mapRef.current, {
                         center,
                         zoom,
                         mapTypeControl: true,
@@ -108,7 +106,7 @@ export function MapComponent({
     useEffect(() => {
         if (!map || !window.google || !window.google.maps) return
 
-        const google = window.google
+
 
         // Clear existing markers and circles
         markers.forEach((marker) => marker.setMap(null))
@@ -119,12 +117,12 @@ export function MapComponent({
 
         locations.forEach((location) => {
             // Create marker
-            const marker = new google.maps.Marker({
+            const marker = new window.google.maps.Marker({
                 position: { lat: location.latitude, lng: location.longitude },
                 map,
                 title: location.name,
                 icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
+                    path: window.google.maps.SymbolPath.CIRCLE,
                     scale: 10,
                     fillColor: '#FF6B35',
                     fillOpacity: 1,
@@ -134,7 +132,7 @@ export function MapComponent({
             })
 
             // Create info window
-            const infoWindow = new google.maps.InfoWindow({
+            const infoWindow = new window.google.maps.InfoWindow({
                 content: `
           <div style="padding: 8px;">
             <h3 style="margin: 0 0 4px 0; font-weight: bold; color: #1F2937;">${location.name}</h3>
@@ -150,7 +148,7 @@ export function MapComponent({
             newMarkers.push(marker)
 
             // Create geofence circle
-            const circle = new google.maps.Circle({
+            const circle = new window.google.maps.Circle({
                 strokeColor: '#FF6B35',
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
