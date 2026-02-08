@@ -11,8 +11,17 @@ export default function NotificationsPage() {
     const [message, setMessage] = useState('')
     const [targetType, setTargetType] = useState('all')
 
-    const handleSendNotification = () => {
+    const [isLoading, setIsLoading] = useState(false)
+
+    const handleSendNotification = async () => {
+        setIsLoading(true)
+        // Simulate API call to avoid blocking main thread immediately
+        await new Promise(resolve => setTimeout(resolve, 1000))
+
         // In production, this would call Supabase Edge Function
+        // const { data, error } = await supabase.functions.invoke('send-push', { body: { title, message, targetType } })
+
+        setIsLoading(false)
         alert('Notificación enviada!')
         setTitle('')
         setMessage('')
@@ -88,9 +97,9 @@ export default function NotificationsPage() {
                             />
 
                             <div className="flex items-center space-x-3 pt-4">
-                                <Button className="flex-1" onClick={handleSendNotification}>
+                                <Button className="flex-1" onClick={handleSendNotification} isLoading={isLoading}>
                                     <Send className="w-4 h-4 mr-2" />
-                                    Enviar Ahora
+                                    {isLoading ? 'Enviando...' : 'Enviar Ahora'}
                                 </Button>
                                 <Button variant="secondary" className="flex-1">
                                     <Clock className="w-4 h-4 mr-2" />
@@ -158,8 +167,8 @@ export default function NotificationsPage() {
                             >
                                 <div className="flex items-start space-x-4 flex-1">
                                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${notification.status === 'delivered' ? 'bg-green-100' :
-                                            notification.status === 'sent' ? 'bg-blue-100' :
-                                                'bg-red-100'
+                                        notification.status === 'sent' ? 'bg-blue-100' :
+                                            'bg-red-100'
                                         }`}>
                                         {notification.status === 'delivered' ? (
                                             <CheckCircle className="w-5 h-5 text-green-600" />
@@ -193,8 +202,8 @@ export default function NotificationsPage() {
                                         {notification.sentAt}
                                     </p>
                                     <p className={`text-xs font-medium mt-1 ${notification.status === 'delivered' ? 'text-green-600' :
-                                            notification.status === 'sent' ? 'text-blue-600' :
-                                                'text-red-600'
+                                        notification.status === 'sent' ? 'text-blue-600' :
+                                            'text-red-600'
                                         }`}>
                                         {notification.status === 'delivered' ? 'Entregada' :
                                             notification.status === 'sent' ? 'Enviada' : 'Fallida'}
