@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Modal } from '@/components/ui/Modal'
 import { MapComponent } from '@/components/MapComponent'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { MapPin, Plus, Edit, Trash, Navigation } from 'lucide-react'
 
 export default function LocationsPage() {
@@ -33,17 +34,19 @@ export default function LocationsPage() {
             {/* Interactive Map */}
             <Card>
                 <CardContent className="pt-6">
-                    <MapComponent
-                        center={{ lat: 40.416775, lng: -3.703790 }}
-                        zoom={12}
-                        locations={locations.map(loc => ({
-                            id: loc.name,
-                            name: loc.name,
-                            latitude: loc.latitude,
-                            longitude: loc.longitude,
-                            geofence_radius: loc.geofenceRadius,
-                        }))}
-                    />
+                    <ErrorBoundary>
+                        <MapComponent
+                            center={{ lat: 40.416775, lng: -3.703790 }}
+                            zoom={12}
+                            locations={locations.map(loc => ({
+                                id: loc.name,
+                                name: loc.name,
+                                latitude: loc.latitude,
+                                longitude: loc.longitude,
+                                geofence_radius: loc.geofenceRadius,
+                            }))}
+                        />
+                    </ErrorBoundary>
                 </CardContent>
             </Card>
 
