@@ -10,8 +10,8 @@ export async function middleware(req: NextRequest) {
         data: { session },
     } = await supabase.auth.getSession()
 
-    // Si el usuario no tiene sesión y trata de acceder a una ruta protegida
-    if (!session && req.nextUrl.pathname.startsWith('/dashboard')) {
+    // Si el usuario no tiene sesión y trata de acceder a una ruta protegida (dashboard o onboarding)
+    if (!session && (req.nextUrl.pathname.startsWith('/dashboard') || req.nextUrl.pathname.startsWith('/onboarding'))) {
         const redirectUrl = req.nextUrl.clone()
         redirectUrl.pathname = '/login'
         return NextResponse.redirect(redirectUrl)
@@ -28,5 +28,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/dashboard/:path*', '/login', '/register'],
+    matcher: ['/dashboard/:path*', '/login', '/register', '/onboarding/:path*'],
 }
